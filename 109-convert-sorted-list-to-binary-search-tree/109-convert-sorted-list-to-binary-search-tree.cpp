@@ -26,27 +26,24 @@ public:
             return NULL;
         if(head->next==NULL)
             return new TreeNode(head->val);
-        ListNode *mid = middleNode(head);
+        
+        ListNode *mid = middle(head);
         TreeNode *node = new TreeNode(mid->val);
         node->left = sortedListToBST(head);
         node->right = sortedListToBST(mid->next);
         return node;
-        
     }
-     ListNode* middleNode(ListNode* head) {
-        ListNode *slow = head;
+    ListNode *middle(ListNode *head){
         ListNode *fast = head;
-         ListNode *prev = NULL;
+        ListNode* slow = head;
+        ListNode *prev = NULL;
         
-        while(fast!=NULL && fast->next!=NULL){
+        while(fast!=NULL and fast->next!=NULL){
             prev = slow;
             slow = slow->next;
             fast = fast->next->next;
-            
         }
-         prev->next = nullptr;
-        
+        prev->next = nullptr;
         return slow;
-        
     }
 };
