@@ -70,47 +70,27 @@ struct TNode
         left=right=NULL;
     }
 }; */
-
-
-
- 
-
- 
-
 class Solution{
- public:
-   TNode* sortedListToBST(LNode *head) {
-       //code here4
-       if(head == NULL)
-           return NULL;
-           
-       if(head->next == NULL)
-           return new TNode(head->data);
-           
-       struct LNode *mid = findMiddle(head);
-       struct TNode *root = new TNode(mid->data);
-       root->left = sortedListToBST(head);
-       root->right = sortedListToBST(mid->next);
-       
-       return root;
-   }
-   
-   LNode *findMiddle(LNode *head)
-   {
-       struct LNode* slow = head;
-       struct LNode* fast = head;
-       struct LNode* prev = NULL;
-       
-       while(fast != NULL && fast->next != NULL)
-       {
-           prev = slow;
-           slow = slow->next;
-           fast = fast->next->next;
-       }
-       prev->next = nullptr;
-       
-       return slow;
-   }
+  public:
+    TNode* sortedListToBST(LNode *head , LNode *tail = NULL) {
+        //code here
+        if(head==tail){
+            return NULL;
+        }
+        LNode* slow = head;
+        LNode* fast = head;
+        while(fast!=tail and fast->next!=tail){
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        TNode *node = new TNode(slow->data);
+        node->left = sortedListToBST(head , slow);
+        node->right = sortedListToBST(slow->next , tail);
+        
+        return node;
+        
+        
+    }
 };
 
 // { Driver Code Starts.
