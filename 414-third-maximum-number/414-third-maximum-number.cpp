@@ -8,10 +8,11 @@ public:
             ans.push_back(it);
         }
         sort(ans.begin() , ans.end() , greater<int>());
-        if(ans.size()==1)
+        
+        if(ans.size()==1 or ans.size()==2 )
             return ans[0];
-        else if(ans.size()==2)
-            return ans[0];
+        
+            
         return ans[2];
         
     }
