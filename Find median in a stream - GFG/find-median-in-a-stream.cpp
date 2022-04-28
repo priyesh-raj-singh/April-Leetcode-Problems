@@ -12,7 +12,7 @@ class Solution
    priority_queue<int> pq1; // max heap
    priority_queue<int,vector<int>,greater<int>> pq2; // min heap
    public:
-   //Function to insert heap
+
    void insertHeap(int &x)
    {
        if(pq1.empty() || pq1.top() >= x){
@@ -24,7 +24,7 @@ class Solution
        balanceHeaps();
    }
    
-   //Function to balance heaps.
+  
    void balanceHeaps()
    {
        if(pq1.size() > pq2.size() && pq1.size() - pq2.size() > 1){
@@ -41,15 +41,16 @@ class Solution
   
    double getMedian()
    {
-       double med = 0.0;
-       if(pq1.size() != pq2.size()){
-           med = pq1.size() > pq2.size() ? pq1.top() : pq2.top();
-       }
-       else{
-           med = (double)(pq1.top() + pq2.top()) / 2;
-       }
-       
-       return (med);
+      if(pq1.size()==pq2.size()){
+          return (pq1.top()+pq2.top())/2.0;
+      }
+      else if(pq1.size()>pq2.size()){
+          return pq1.top();
+          
+      }
+      else{
+          return pq2.top();
+      }
    }
     
 };
